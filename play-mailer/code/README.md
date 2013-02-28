@@ -1,0 +1,1 @@
+# play-mailer - an extension to the Typesafe mailer plugin

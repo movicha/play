@@ -1,0 +1,18 @@
+@(skipCurrent: Boolean = false, showInternal: Boolean = false, showExternal: Boolean = true)(body: com.clouidio.play.module.auth.providers.AuthProvider => Html)
+
+@import com.clouidio.play.module.auth.PlayAuthenticate
+@import com.clouidio.play.module.auth.providers.AuthProvider.Registry
+
+@defining(Registry.getProviders()) { providers =>
+	@if(providers != null && providers.size() > 0) {
+		@defining(PlayAuthenticate.isLoggedIn(session())) { loggedIn =>
+			@defining(PlayAuthenticate.getUser(session())) { auth =>
+			    @for(p <- providers) {
+			    	@if(((showExternal && p.isExternal()) || (showInternal && !p.isExternal())) && (!loggedIn || !skipCurrent || (skipCurrent && (loggedIn && !p.getKey().equals(auth.getProvider()))))) {
+			    		@body(p)
+			    	}
+			    }
+		    }
+	    }
+	}
+}

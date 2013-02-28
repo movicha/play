@@ -1,0 +1,19 @@
+@import com.clouidio.play.module.auth.views.html._
+
+@main("Play! Authenticate simple OAuth sample") {
+
+@currentAuth() { auth =>
+	@if(auth != null) {
+		<a href="@com.clouidio.play.module.auth.controllers.routes.Authenticate.logout">Logout</a>
+		<br/><br/>
+	}
+}
+
+Login/Signup: 
+	@forProviders() { p =>
+		<a href="@p.getUrl()">@p.getKey()</a>
+	}
+	
+	<br/><br/>
+	<a href="@routes.Restricted.index">Secrets everywhere...</a>
+}

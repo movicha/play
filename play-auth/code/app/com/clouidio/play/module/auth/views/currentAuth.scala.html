@@ -1,0 +1,7 @@
+@()(body: com.clouidio.play.module.auth.user.AuthUser => Html)
+
+@import com.clouidio.play.module.auth.PlayAuthenticate
+
+@defining(PlayAuthenticate.getUser(session())) { auth =>
+	@body(auth)
+}
