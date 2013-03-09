@@ -1,4 +1,4 @@
-# play-mailer - an extension to the Typesafe mailer plugin for Play! Framework 2 (Java)
+# play-mailer - An extension to the Typesafe mailer plugin for Play! Framework 2 (Java)
 
 This plugin uses concepts from [Play20StartApp][] to make sending emails (text, html, mixed) easier. A sample is included.
 
