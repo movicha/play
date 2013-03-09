@@ -1,0 +1,1 @@
+# play-mailer-usage - a sample application for play-mailer
