@@ -1,4 +1,4 @@
-# play-authenticate - An extensible authentication plugin for Play! Framework 2 (Java)
+# play-auth - An extensible authentication plugin for Play! Framework 2 (Java)
 
 This plugin uses concepts from [securesocial2][] and [Play20StartApp][] and provides a sample containing code from [deadbolt2][].
 
@@ -16,7 +16,7 @@ You can find a live demo on [heroku](https://play-authenticate.herokuapp.com/ "P
 
 ## Features
 
-* Fully customizable and localizable controllers and views (e.g. Play Authenticate allows you to define your own controllers and views for every visual step of the signup and/or log in process)
+* Fully customizable and localizable controllers and views (e.g. Play Auth allows you to define your own controllers and views for every visual step of the signup and/or log in process)
 * Completely dynamic URL generation for all views (uses the route file - means you can adapt the look and feel as much as you like).
 	* The sample shows how to do this with Twitter bootstrap
 * Linking of accounts (e.g. one local user with multiple authentication providers)
