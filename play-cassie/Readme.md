@@ -1,8 +1,8 @@
-PlayCassie is an open-source library built to speed up developer productivity of developing a noSQL scalable solution.  PlayCassie leverages the schemaless concept of noSQL and embraces it, while speeding up developer productivity by allowing some partially structured data.
+# play-cassie is nn extensible plugin to provide scalable noSQL access for Play! Framework 2 (Java)
 
-PlayCassie also embraces embedding information in rows so you can do quick one key lookups unlike JPA(which is for RDBMS system, not noSQL systems). On top of that, we still support relations between these datasets as well allowing you to do joins all while scaling to billions of users.
+#### PlayCassie also embraces embedding information in rows so you can do quick one key lookups unlike JPA (which is for RDBMS system, not noSQL systems). On top of that, we still support relations between these datasets as well allowing you to do joins all while scaling to billions of users.
 
-PlayCassie Feature List
+## PlayCassie Feature List
 
 Inheritance class hierarchy in one table is supported like hibernate
 @NoSqlEmbedded for List<Integer>, List<LocalDate>, List<String>, etc. etc. (something NOT in JPA)
@@ -34,7 +34,7 @@ Support for all major data types with an option to create your own custom conver
 @NoSqlIndexed on subclass fields that create smaller indexes(only subclasses in the index)
  
 
-Features soon to be added
+## Features soon to be added
 
 Ability to index fields inside Embedded objects even if embedded object is a list so you can query them still
 Map/Reduce tasks for re-indexing, or creating new indexes from existing data
