@@ -22,10 +22,13 @@ import com.clouidio.play.module.auth.providers.oauth2.OAuth2AuthProvider;
 public class FacebookAuthProvider extends
 		OAuth2AuthProvider<FacebookAuthUser, FacebookAuthInfo> {
 	private static final String MESSAGE = "message";
-
+	private static final String ERROR = "error";
+	private static final String FIELDS = "fields";
+	
 	static final String PROVIDER_KEY = "facebook";
 	
 	private static final String USER_INFO_URL_SETTING_KEY = "userInfoUrl";
+	private static final String USER_INFO_FIELDS_SETTING_KEY = "userInfoFields";
 
 	public FacebookAuthProvider(Application app) {
 		super(app);
@@ -37,15 +40,18 @@ public class FacebookAuthProvider extends
 
 		final String url = getConfiguration().getString(
 				USER_INFO_URL_SETTING_KEY);
+		final String fields = getConfiguration().getString(
+				USER_INFO_FIELDS_SETTING_KEY);
 		final Response r = WS
 				.url(url)
 				.setQueryParameter(OAuth2AuthProvider.Constants.ACCESS_TOKEN,
-						info.getAccessToken()).get()
-				.get(PlayAuthenticate.TIMEOUT);
+					info.getAccessToken())
+				.setQueryParameter(FIELDS, fields)
+				.get().get(PlayAuthenticate.TIMEOUT);
 
 		final JsonNode result = r.asJson();
 		if (result.get(OAuth2AuthProvider.Constants.ERROR) != null) {
-			throw new AuthException(result.get(MESSAGE).asText());
+			throw new AuthException(result.get(ERROR).get(MESSAGE).asText());
 		} else {
 			Logger.debug(result.toString());
 			return new FacebookAuthUser(result, info, state);
@@ -61,7 +67,7 @@ public class FacebookAuthProvider extends
 	protected FacebookAuthInfo buildInfo(final Response r)
 			throws AccessTokenException {
 		if (r.getStatus() >= 400) {
-			throw new AccessTokenException(r.asJson().get(MESSAGE).asText());
+			throw new AccessTokenException(r.asJson().get(ERROR).get(MESSAGE).asText());
 		} else {
 			final String query = r.getBody();
 			Logger.debug(query);
