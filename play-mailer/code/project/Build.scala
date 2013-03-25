@@ -13,7 +13,7 @@ object ApplicationBuild extends Build {
 
     val main = play.Project(appName, libVersion, appDependencies).settings(
       	version := libVersion,
-     	  organization := "com.barreto",
+     	  organization := "com.clouidio",
       	libraryDependencies += "com.typesafe" % "play-plugins-mailer_2.10" % "2.1.0",
         publishArtifact in packageDoc := false
     )
