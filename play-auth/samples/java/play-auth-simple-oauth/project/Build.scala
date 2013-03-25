@@ -4,12 +4,12 @@ import play.Project._
 
 object ApplicationBuild extends Build {
 
-    val appName         = "play-authenticate-simple-oauth"
+    val appName         = "play-auth-simple-oauth"
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
       "be.objectify"  %%  "deadbolt-java"     % "2.1-SNAPSHOT",
-      "com.clouidio"      %%  "play-authenticate" % "0.2.5-SNAPSHOT",
+      "com.clouidio"      %%  "play-auth" % "0.2.5-SNAPSHOT",
       javaCore,
       javaJdbc,
       javaEbean
@@ -22,7 +22,7 @@ object ApplicationBuild extends Build {
       resolvers += Resolver.url("play-mailer (release)", url("http://www.github.com/clouidio/play-mailer/repo/releases/"))(Resolver.ivyStylePatterns),
       resolvers += Resolver.url("play-mailer (snapshot)", url("http://www.github.com/clouidio/play-mailer/repo/snapshots/"))(Resolver.ivyStylePatterns),
 
-      resolvers += Resolver.url("play-authenticate (release)", url("http://www.github.com/clouidio/play-authenticate/repo/releases/"))(Resolver.ivyStylePatterns),
-      resolvers += Resolver.url("play-authenticate (snapshot)", url("http://www.github.com/clouidio/play-authenticate/repo/snapshots/"))(Resolver.ivyStylePatterns)
+      resolvers += Resolver.url("play-authenticate (release)", url("http://www.github.com/clouidio/play/play-auth/repo/releases/"))(Resolver.ivyStylePatterns),
+      resolvers += Resolver.url("play-authenticate (snapshot)", url("http://www.github.com/clouidio/play/play-auth/repo/snapshots/"))(Resolver.ivyStylePatterns)
     )
 }
