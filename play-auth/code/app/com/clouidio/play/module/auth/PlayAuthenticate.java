@@ -1,4 +1,4 @@
-package com.clouidio.play.module.pa;
+package com.clouidio.play.module.auth;
 
 import java.util.Date;
 
