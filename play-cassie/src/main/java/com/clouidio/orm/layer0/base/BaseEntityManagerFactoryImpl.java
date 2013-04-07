@@ -82,8 +82,11 @@ public class BaseEntityManagerFactoryImpl implements NoSqlEntityManagerFactory {
         discoverer.discover(cl);
         
         for(Class c : classes) {
-        	listener.scanClass(c);
-        }
+			listener.scanClass(c);
+			if (c.getSuperclass() != java.lang.Object.class) {
+				listener.scanClass(c.getSuperclass());
+			}
+		}
         
         if(log.isTraceEnabled()) {
         	URL[] resources = discoverer.findResources(cl);
@@ -123,7 +126,7 @@ public class BaseEntityManagerFactoryImpl implements NoSqlEntityManagerFactory {
 		
 		inspectorField.setCustomConverters(converters);
 		
-		log.info("Begin scanning for jars with NoSQL.Persistence.class");
+		log.info("Begin scanning for jars with nosql.Persistence.class");
 		
         List<Class> classToScan = (List<Class>) properties.get(Bootstrap.LIST_OF_EXTRA_CLASSES_TO_SCAN_KEY);
         
@@ -136,6 +139,10 @@ public class BaseEntityManagerFactoryImpl implements NoSqlEntityManagerFactory {
 	@SuppressWarnings({ "rawtypes" })
 	public void setupQueryStuff(MetaAbstractClass classMeta) {
 		Class<?> clazz = classMeta.getMetaClass();
+		// DEBUG
+		// TODO: Remove when done
+		// System.out.println("classMeta.getColumnFamily(): " + classMeta.getColumnFamily());
+		// System.out.println("classMeta.getMetaDbo().getColumnFamily():  " + classMeta.getMetaDbo().getColumnFamily());
 		NoSqlQuery annotation = clazz.getAnnotation(NoSqlQuery.class);
 		NoSqlQueries annotation2 = clazz.getAnnotation(NoSqlQueries.class);
 		List<NoSqlQuery> theQueries = new ArrayList<NoSqlQuery>();

@@ -20,7 +20,7 @@ public interface NoSqlTypedSession {
 	 * be warned, when you call persist, it is executed IMMEDIATELY, there is no flush method on that
 	 * interface.  In fact, the flush methods of all higher level interfaces call persist ONCE on the raw
 	 * session and providers are supposed to do ONE send to avoid network latency if you are sending 100
-	 * actions to the NoSQL database.
+	 * actions to the nosql database.
 	 * @return The raw session that all the providers implement
 	 */
 	public NoSqlSession getRawSession();

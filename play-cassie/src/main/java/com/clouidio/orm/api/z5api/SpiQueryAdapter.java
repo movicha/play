@@ -20,7 +20,7 @@ public interface SpiQueryAdapter {
 	public DirectCursor<IndexColumnInfo> getResultList(Set<ViewInfo> alreadyJoinedViews, String indexedColumn);
 
 	/**
-	 * The Iterable from getResults() is only loaded with 'batchSize' at a time from the NoSQL store so as you iterate
+	 * The Iterable from getResults() is only loaded with 'batchSize' at a time from the nosql store so as you iterate
 	 * GC should be releasing memory for the previous 500 while the Iterable loads the next 500.
 	 * 
 	 * @param batchSize

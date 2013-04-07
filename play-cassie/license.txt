@@ -1,6 +1,6 @@
-PlayCassie is an open-source library built to speed up developer productivity of developing a noSQL scalable solution. Playorm leverages the schemaless concept of noSQL and embraces it, while speeding up developer productivity by allowing some partially structured data.
+play-cassie is an open-source library built to speed up developer productivity of developing a noSQL scalable solution. Playorm leverages the schemaless concept of noSQL and embraces it, while speeding up developer productivity by allowing some partially structured data.
 
-Addendum: Anyone who contributes to this PlayCassie project automatically is giving ClouidIO a shared copyright.  (This allows us to have multiple licenses on this project).  The only way to contribute is by doing a pull request on github so if you initiate one, you grant us a shared copyright
+Addendum: Anyone who contributes to this play-cassie project automatically is giving ClouidIO a shared copyright.  (This allows us to have multiple licenses on this project).  The only way to contribute is by doing a pull request on github so if you initiate one, you grant us a shared copyright
 
 Mozilla Public License Version 2.0
 ==================================

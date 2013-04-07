@@ -1,4 +1,4 @@
-package NoSQL;
+package nosql;
 
 public class Persistence {
 

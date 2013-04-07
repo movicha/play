@@ -69,7 +69,7 @@ public class CursorRow<T> extends AbstractCursor<KeyValue<T>>{
 			byte[] nonVirtKey = idMeta.unformVirtRowKey((byte[]) key);
 			Object obj = meta.getIdField().translateFromBytes(nonVirtKey);
 			if(query != null) {
-				RowNotFoundException exc = new RowNotFoundException("Your query="+query+" contained a value with a pk where that entity no longer exists in the NoSQL store");
+				RowNotFoundException exc = new RowNotFoundException("Your query="+query+" contained a value with a pk where that entity no longer exists in the nosql store");
 				keyVal.setException(exc);
 			}
 			keyVal.setKey(obj);

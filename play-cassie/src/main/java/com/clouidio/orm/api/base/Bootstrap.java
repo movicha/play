@@ -8,17 +8,21 @@ import com.clouidio.orm.api.z8spi.conv.Converter;
 @SuppressWarnings("rawtypes")
 public abstract class Bootstrap {
 
-	public static final String TYPE = "NoSQL.NoSQLtype";
-	public static final String AUTO_CREATE_KEY = "NoSQL.autoCreateKey";
-	public static final String LIST_OF_EXTRA_CLASSES_TO_SCAN_KEY = "NoSQL.listOfClassesToScan";
+	public static final String TYPE = "nosql.nosqltype";
+	public static final String AUTO_CREATE_KEY = "nosql.autoCreateKey";
+	public static final String LIST_OF_EXTRA_CLASSES_TO_SCAN_KEY = "nosql.listOfClassesToScan";
 	
 	public static final String CASSANDRA_BUILDER = SpiConstants.CASSANDRA_BUILDER;
-	public static final String CASSANDRA_CLUSTERNAME = "NoSQL.cassandra.clusterName";
-	public static final String CASSANDRA_KEYSPACE = "NoSQL.cassandra.keyspace";
-	public static final String CASSANDRA_SEEDS = "NoSQL.cassandra.seeds";
+	public static final String CASSANDRA_CLUSTERNAME = "nosql.cassandra.clusterName";
+	public static final String CASSANDRA_KEYSPACE = "nosql.cassandra.keyspace";
+	public static final String CASSANDRA_SEEDS = "nosql.cassandra.seeds";
+	
+	public static final String MONGODB_CLUSTERNAME = "nosql.mongodb.clusterName";
+	public static final String MONGODB_KEYSPACE = "nosql.mongodb.keyspace";
+	public static final String MONGODB_SEEDS = "nosql.mongodb.seeds";
 	
 	private static final String OUR_IMPL = "com.clouidio.orm.impl.bindings.BootstrapImpl";
-	public static final String SPI_IMPL = "NoSQL.spi.implementation";
+	public static final String SPI_IMPL = "nosql.spi.implementation";
 	
 	public synchronized static NoSqlEntityManagerFactory create(Map<String, Object> properties) {
 		return create(properties, Bootstrap.class.getClassLoader());
@@ -36,7 +40,7 @@ public abstract class Bootstrap {
 			String keyspace = (String) properties.get(CASSANDRA_KEYSPACE);
 			String seeds = (String) properties.get(CASSANDRA_SEEDS);
 			if(clusterName == null || keyspace == null || seeds == null)
-				throw new IllegalArgumentException("Must supply the NoSQL.cassandra.* properties.  Read Bootstrap.java for values");
+				throw new IllegalArgumentException("Must supply the nosql.cassandra.* properties.  Read Bootstrap.java for values");
 			createAndAddBestCassandraConfiguration(properties, clusterName, keyspace, seeds);
 			
 		} else
@@ -83,4 +87,13 @@ public abstract class Bootstrap {
 
 	protected abstract void createBestCassandraConfig(Map<String, Object> properties,
 			String clusterName, String keyspace2, String seeds2);
+
+	public static void createAndAddBestMongoDbConfiguration(Map<String, Object> properties, String clusterName, String keyspace, String seeds) {
+    	Bootstrap bootstrap = createInstance(OUR_IMPL);
+    	bootstrap.createBestMongoDbConfig(properties, clusterName, keyspace, seeds);
+  	}
+
+ 	protected abstract void createBestMongoDbConfig(Map<String, Object> properties,
+     	String clusterName, String keyspace2, String seeds2);
+
 }

@@ -16,11 +16,11 @@ public interface MetaField<OWNER> {
 	public DboColumnMeta getMetaDbo();
 	
 	/**
-	 * For when we are translating from NoSQL row, this is called on each field/column to translate
+	 * For when we are translating from nosql row, this is called on each field/column to translate
 	 */
 	public void translateFromColumn(Row column, OWNER entity, NoSqlSession session);
 	/**
-	 * For when we are translating TO NoSQL row, this is called on each field/column
+	 * For when we are translating TO nosql row, this is called on each field/column
 	 */
 	public void translateToColumn(InfoForIndex<OWNER> info);
 	

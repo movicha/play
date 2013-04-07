@@ -11,7 +11,7 @@ public interface Query<T> {
 	
 	/**
 	 * If there is an entity in your query result list where the index has the value and
-	 * the NoSQL store has no entity, KeyValue contains the exception delaying
+	 * the nosql store has no entity, KeyValue contains the exception delaying
 	 * the exception until code accesses that missing value.  In this method, if you only
 	 * iterate through the first 4 elements and the missing element was #5, you will not see
 	 * any exception at all and code will keep working.
@@ -58,7 +58,7 @@ public interface Query<T> {
 	 * or less rows to stay efficient and fast)
 	 * 
 	 * You probably should use getResultKeyValueList instead since that will delay exceptions caused by entities
-	 * do not exist but are in the index (this is NoSQL after all)
+	 * do not exist but are in the index (this is nosql after all)
 	 * @param firstResult 0 or larger
 	 * @param maxResults null if you want all the results though you should probably cap this so you don't blow out memory
 	 * or use getResults method instead.
@@ -68,7 +68,7 @@ public interface Query<T> {
 	public List<T> getResultList(int firstResult, Integer maxResults);
 	
 	/**
-	 * The rate at which we pull from the NoSQL store.  The default is 500.  We grab 500 entities
+	 * The rate at which we pull from the nosql store.  The default is 500.  We grab 500 entities
 	 * and once you hit 501, we grab the next 500 and so on so you can discard entities as you iterate
 	 * over them.
 	 * 

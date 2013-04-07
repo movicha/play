@@ -279,7 +279,7 @@ public class NoSqlRawLogger implements NoSqlRawSession {
 	@Override
 	public void start(Map<String, Object> properties) {
 		if(log.isInfoEnabled()) {
-			log.info("[rawlogger] starting NoSQL Service Provider and connecting");
+			log.info("[rawlogger] starting nosql Service Provider and connecting");
 		}
 		session.start(properties);
 	}
@@ -287,7 +287,7 @@ public class NoSqlRawLogger implements NoSqlRawSession {
 	@Override
 	public void close() {
 		if(log.isInfoEnabled()) {
-			log.info("[rawlogger] closing NoSQL Service Provider");
+			log.info("[rawlogger] closing nosql Service Provider");
 		}
 		session.close();
 	}

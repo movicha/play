@@ -150,7 +150,7 @@ public class QueryAdapter<T> implements Query<T> {
 			return getEntities(all, foundElements, firstResult, maxResults);
 		} catch(RowNotFoundException e) {
 			log.trace("converting row not found into stored entities missing", e);
-			throw new StorageMissingEntitesException(foundElements, "Your index refers to rows that no longer exist in the NoSQL store", e);
+			throw new StorageMissingEntitesException(foundElements, "Your index refers to rows that no longer exist in the nosql store", e);
 		}
 	}
 	
@@ -182,7 +182,7 @@ public class QueryAdapter<T> implements Query<T> {
 
 		if(exc != null) {
 			log.trace("converting row not found into stored entities missing", exc);
-			throw new StorageMissingEntitesException(foundElements, "Your index refers to rows that no longer exist in the NoSQL store(use getResults method instead to avoid this exception until you call getValue on actual element)", exc);
+			throw new StorageMissingEntitesException(foundElements, "Your index refers to rows that no longer exist in the nosql store(use getResults method instead to avoid this exception until you call getValue on actual element)", exc);
 		}
 		return entities;
 	}

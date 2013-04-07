@@ -10,7 +10,7 @@ public interface NoSqlEntityManagerFactory {
 	void rescan(List<Class> classes, ClassLoader cl);
 
 	/**
-	 * Releases the entire pool of connections and disconnects from the NoSQL store.
+	 * Releases the entire pool of connections and disconnects from the nosql store.
 	 */
 	void close();
 }

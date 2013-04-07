@@ -14,7 +14,7 @@ import com.clouidio.orm.api.z8spi.action.IndexColumn;
 import com.clouidio.orm.api.z8spi.iter.AbstractCursor;
 import com.clouidio.orm.api.z8spi.iter.DirectCursor;
 import com.clouidio.orm.api.z8spi.meta.DboTableMeta;
-import com.clouidio.orm.layer5.NoSQL.cache.NoSqlWriteCacheImpl;
+import com.clouidio.orm.layer5.nosql.cache.NoSqlWriteCacheImpl;
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(NoSqlWriteCacheImpl.class)
@@ -25,7 +25,7 @@ public interface NoSqlSession {
 	 * be warned, when you call persist, it is executed IMMEDIATELY, there is no flush method on that
 	 * interface.  In fact, the flush methods of all higher level interfaces call persist ONCE on the raw
 	 * session and providers are supposed to do ONE send to avoid network latency if you are sending 100
-	 * actions to the NoSQL database.
+	 * actions to the nosql database.
 	 * @return The raw session that all the providers implement
 	 */
 	public NoSqlRawSession getRawSession();

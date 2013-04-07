@@ -6,10 +6,11 @@ import com.clouidio.orm.api.z5api.NoSqlSession;
 import com.clouidio.orm.api.z8spi.NoSqlRawSession;
 import com.clouidio.orm.api.z8spi.meta.DboDatabaseMeta;
 import com.clouidio.orm.layer0.base.BaseEntityManagerFactoryImpl;
-import com.clouidio.orm.layer5.NoSQL.cache.NoSqlReadCacheImpl;
-import com.clouidio.orm.layer5.NoSQL.cache.NoSqlWriteCacheImpl;
+import com.clouidio.orm.layer5.nosql.cache.NoSqlReadCacheImpl;
+import com.clouidio.orm.layer5.nosql.cache.NoSqlWriteCacheImpl;
 import com.clouidio.orm.layer9z.spi.db.cassandra.CassandraSession;
 import com.clouidio.orm.layer9z.spi.db.inmemory.InMemorySession;
+import com.clouidio.orm.layer9z.spi.db.mongodb.MongoDbSession;
 import com.clouidio.orm.logging.NoSqlDevLogger;
 import com.clouidio.orm.logging.NoSqlRawLogger;
 import com.google.inject.Binder;
@@ -55,6 +56,9 @@ public class ProductionBindings implements Module {
 			break;
 		case IN_MEMORY:
 			binder.bind(NoSqlRawSession.class).annotatedWith(Names.named(name)).to(InMemorySession.class).asEagerSingleton();
+			break;
+		case MONGODB:
+			binder.bind(NoSqlRawSession.class).annotatedWith(Names.named(name)).to(MongoDbSession.class).asEagerSingleton();
 			break;
 		default:
 			throw new RuntimeException("bug, unsupported database type="+type);

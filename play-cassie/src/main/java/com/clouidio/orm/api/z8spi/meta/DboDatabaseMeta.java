@@ -15,9 +15,9 @@ import com.clouidio.orm.api.base.anno.NoSqlOneToMany;
 public class DboDatabaseMeta {
 	
 	/**
-	 * This is the key for the SINGLE row of DboDatabaseMeta that exists in the NoSQL store.
+	 * This is the key for the SINGLE row of DboDatabaseMeta that exists in the nosql store.
 	 */
-	public static final String META_DB_ROWKEY = "NoSQLorm";
+	public static final String META_DB_ROWKEY = "nosqlorm";
 	
 	@NoSqlId(usegenerator=false)
 	private String id = META_DB_ROWKEY;

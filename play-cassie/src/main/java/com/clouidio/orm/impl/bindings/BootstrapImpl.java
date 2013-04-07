@@ -86,16 +86,24 @@ public class BootstrapImpl extends Bootstrap {
 	    .withConnectionPoolMonitor(new CountingConnectionPoolMonitor());
 		
 		
-	if(seeds2.contains(",")) {
-		//for a multi-node cluster, we want the test suite using quorum on writes and
-		//reads so we have no issues...
-		AstyanaxConfigurationImpl config = new AstyanaxConfigurationImpl();
-		config.setDefaultWriteConsistencyLevel(ConsistencyLevel.CL_QUORUM);
-		config.setDefaultReadConsistencyLevel(ConsistencyLevel.CL_QUORUM);
-		builder = builder.withAstyanaxConfiguration(config);
-	}
-	properties.put(Bootstrap.CASSANDRA_BUILDER, builder);
+		if(seeds2.contains(",")) {
+			//for a multi-node cluster, we want the test suite using quorum on writes and
+			//reads so we have no issues...
+			AstyanaxConfigurationImpl config = new AstyanaxConfigurationImpl();
+			config.setDefaultWriteConsistencyLevel(ConsistencyLevel.CL_QUORUM);
+			config.setDefaultReadConsistencyLevel(ConsistencyLevel.CL_QUORUM);
+			builder = builder.withAstyanaxConfiguration(config);
+		}
+		
+		properties.put(Bootstrap.CASSANDRA_BUILDER, builder);
 	}
 
+	@Override
+	protected void createBestMongoDbConfig(Map<String, Object> properties,
+		String clusterName, String keyspace2, String seeds2) {
+		properties.put(Bootstrap.MONGODB_CLUSTERNAME, clusterName);
+		properties.put(Bootstrap.MONGODB_KEYSPACE, keyspace2);
+		properties.put(Bootstrap.MONGODB_SEEDS, seeds2);
+	}
 
 }

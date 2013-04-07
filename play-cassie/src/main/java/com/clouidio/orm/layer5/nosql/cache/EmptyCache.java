@@ -1,4 +1,4 @@
-package com.clouidio.orm.layer5.NoSQL.cache;
+package com.clouidio.orm.layer5.nosql.cache;
 
 import com.clouidio.orm.api.z8spi.Cache;
 import com.clouidio.orm.api.z8spi.Row;

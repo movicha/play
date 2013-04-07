@@ -512,7 +512,7 @@ public class TestOneToMany {
 		EmbeddedEmail sub = new EmbeddedEmail();
 		sub.setId("sub");
 		sub.setName("dean");
-		sub.setType("NoSQLtype");
+		sub.setType("nosqltype");
 		
 		EmbeddedEmail e1 = new EmbeddedEmail();
 		e1.setId("e1");

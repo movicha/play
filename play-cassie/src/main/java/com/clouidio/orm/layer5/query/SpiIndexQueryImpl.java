@@ -259,7 +259,7 @@ public class SpiIndexQueryImpl implements SpiQueryAdapter {
 			}
 			scan = session.find(info.getOwner(), new IterableWrappingCursor<byte[]>(keyList), false, true, batchSize);
 		} else
-			throw new UnsupportedOperationException("Other operations not supported yet for Primary Key. Use @NoSQLIndexed for Primary Key.type="+root.getType());
+			throw new UnsupportedOperationException("Other operations not supported yet for Primary Key. Use @nosqlIndexed for Primary Key.type="+root.getType());
 		DirectCursor<IndexColumnInfo> processKeys = processKeysforPK(viewInfo, info, scan);
 		return processKeys;
 	}

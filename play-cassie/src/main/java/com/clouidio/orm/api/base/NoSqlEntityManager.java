@@ -22,20 +22,20 @@ public interface NoSqlEntityManager {
 
 	/**
 	 * Retrieve a special interface that deals with rows and still does indexing when you persist/remove rows.  This interface is
-	 * used when inserting unknown datasets into a NoSQL store where you want indexing to be automatic still.  Generally used
+	 * used when inserting unknown datasets into a nosql store where you want indexing to be automatic still.  Generally used
 	 * for research datasets where a user uploading data is telling you the columns and what columns to index for him.
 	 */
 	public NoSqlTypedSession getTypedSession();
 	
 	/**
-	 * Creates a 'Remove' action in the write cache that will be sent to NoSQL store when flush is called.  This 
+	 * Creates a 'Remove' action in the write cache that will be sent to nosql store when flush is called.  This 
 	 * method also creates RemoveIndex actions that will be sent when flush is called as well. 
 	 * @param entity Entity to be removed
 	 */
 	public void remove(Object entity);
 	
 	/**
-	 * Creates a 'Persist' action in the write cache that will be sent to NoSQL store when flush is called.  This method
+	 * Creates a 'Persist' action in the write cache that will be sent to nosql store when flush is called.  This method
 	 * also creates PersistIndex and RemoveIndex actions if you have indexed fields and the index needs to be modified
 	 * and those are sent when flush is called as well.
 	 * @param entity Entity to be added
@@ -65,7 +65,7 @@ public interface NoSqlEntityManager {
 	public <T> T find(Class<T> entityType, Object key);
 	
 	/**
-	 * An efficient operation in NoSQL for retrieving many entities at once.  This is the operation
+	 * An efficient operation in nosql for retrieving many entities at once.  This is the operation
 	 * we use very frequently in the ORM for OneToMany operations so we can fetch all your relations 
 	 * extremely fast(as they are fetched in parallel not series so 5ms network latency for 1000 objects
 	 * is not 5 seconds but just 5ms as it is done in parallel).  

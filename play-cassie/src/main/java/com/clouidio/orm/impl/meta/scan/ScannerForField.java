@@ -389,7 +389,7 @@ public class ScannerForField {
 					"Abstract class that has N number of subclasses.  I do not know which subclass to create a " +
 					"proxy for unless I read yet another row in, BUT you may not want the extra hit so instead, " +
 					"you MUST change this field to javax.inject.Provider instead so you can call provider.get() " +
-					"at which point I will go to the NoSQL database and read the row in and the type information " +
+					"at which point I will go to the nosql database and read the row in and the type information " +
 					"and create the correct object for this type.  This is a special case, sorry about that.  In summary, all you " +
 					"need to do is change this Field="+field+" to='private ToOneProvider<YourType> provider = new ToOneProvider<YourType>() " +
 					"and then your getter should just be return provider.get() and the setter should be provider.set(yourInst) and all" +

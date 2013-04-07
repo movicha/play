@@ -1,4 +1,4 @@
-package com.clouidio.orm.layer5.NoSQL.cache;
+package com.clouidio.orm.layer5.nosql.cache;
 
 import java.util.Collection;
 import java.util.HashMap;

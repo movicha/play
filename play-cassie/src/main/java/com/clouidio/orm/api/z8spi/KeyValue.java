@@ -18,7 +18,7 @@ public class KeyValue<T> {
 	}
 	public T getValue() {
 		if(e != null)
-			throw new RowNotFoundException("Row was referenced in index, but not found in NoSQL store.  key="+key, e);
+			throw new RowNotFoundException("Row was referenced in index, but not found in nosql store.  key="+key, e);
 		return value;
 	}
 	public void setValue(T value) {

@@ -3,7 +3,7 @@ map/reduce failing with classloader issue
 
 finish PLAY plugin for NoSql stuff to make that easier...only need to add edits now to playframework plugin and we are good..later add gui for queries
 
-do a TimeUUID for PlayCassie with a type1 style UUID (ie. not random) and allow queries on time range as well.
+do a TimeUUID for play-cassie with a type1 style UUID (ie. not random) and allow queries on time range as well.
 
 make sure query on LocalDateTime works and add test case as well
 

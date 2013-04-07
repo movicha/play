@@ -1,6 +1,15 @@
 package com.clouidio.test.db;
 
+import com.clouidio.orm.api.base.NoSqlEntityManager;
+import com.clouidio.orm.api.base.Query;
 import com.clouidio.orm.api.base.anno.NoSqlIndexed;
+
+import com.clouidio.orm.api.base.anno.NoSqlQueries;
+import com.clouidio.orm.api.base.anno.NoSqlQuery;
+
+@NoSqlQueries({
+     @NoSqlQuery(name ="findByField", query = "select u from TABLE as u where :someField = u.someField")
+})
 
 public class AccountSuper {
 
@@ -24,5 +33,10 @@ public class AccountSuper {
 	public void setIsActive(Boolean indexedColumn) {
 		this.isActive = indexedColumn;
 	}
-	
+
+	public static AccountSuper findByField(NoSqlEntityManager mgr, int field) {
+	    Query<AccountSuper> query = mgr.createNamedQuery(AccountSuper.class, "findByField");
+	    query.setParameter("someField", field);
+	    return query.getSingleObject();
+	}	
 }

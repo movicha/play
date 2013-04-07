@@ -146,8 +146,10 @@ public class BaseEntityManagerImpl implements NoSqlEntityManager, MetaLookup, Me
 		List<Object> keys = new ArrayList<Object>();
 		keys.add(key);
 		Cursor<KeyValue<T>> entities = findAll(entityType, keys);
-		entities.next();
-		return entities.getCurrent().getValue();
+		if (entities.next())
+			return entities.getCurrent().getValue();
+		else
+			return null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -162,8 +164,8 @@ public class BaseEntityManagerImpl implements NoSqlEntityManager, MetaLookup, Me
 		Iterable<byte[]> iter = new IterableKey<T>(meta, keys);
 		Iterable<byte[]> virtKeys = new IterToVirtual(meta.getMetaDbo(), iter);
 		
-		//we pass in null for batch size such that we do infinite size or basically all keys passed into this method in one
-		//shot
+		// we pass in null for batch size such that we do infinite size or basically all keys passed into this method in one
+		// shot
 		return findAllImpl2(meta, new IterableWrappingCursor<byte[]>(virtKeys), null, true, null);
 	}
 	
@@ -214,8 +216,8 @@ public class BaseEntityManagerImpl implements NoSqlEntityManager, MetaLookup, Me
 		
 		SpiQueryAdapter spiAdapter = metaQuery.createQueryInstanceFromQuery(session);
 		
-		//We cannot return MetaQuery since it is used by all QueryAdapters and each QueryAdapter
-		//runs in a different thread potentially while MetaQuery is one used by all threads
+		// We cannot return MetaQuery since it is used by all QueryAdapters and each QueryAdapter
+		// runs in a different thread potentially while MetaQuery is one used by all threads
 		QueryAdapter<T> adapter = adapterFactory.get();
 		adapter.setup(metaClass, metaQuery, spiAdapter, this, forEntity);
 		return adapter;
@@ -257,16 +259,16 @@ public class BaseEntityManagerImpl implements NoSqlEntityManager, MetaLookup, Me
 
 	void saveMetaData() {
 		BaseEntityManagerImpl tempMgr = this;
-        DboDatabaseMeta existing = tempMgr.find(DboDatabaseMeta.class, DboDatabaseMeta.META_DB_ROWKEY);
-//        if(existing != null)
-//        	throw new IllegalStateException("Your property NoSqlEntityManagerFactory.AUTO_CREATE_KEY is set to 'create' which only creates meta data if none exist already but meta already exists");
+        // DboDatabaseMeta existing = tempMgr.find(DboDatabaseMeta.class, DboDatabaseMeta.META_DB_ROWKEY);
+		// if (existing != null)
+		//     throw new IllegalStateException("Your property NoSqlEntityManagerFactory.AUTO_CREATE_KEY is set to 'create' which only creates meta data if none exist already but meta already exists");
 		
         for(DboTableMeta table : databaseInfo.getAllTables()) {
         	
         	for(DboColumnMeta col : table.getAllColumns()) {
         		tempMgr.put(col);
         	}
-			if (!table.isEmbeddable())
+			if (!table.isEmbeddable() && table.getIdColumnMeta() != null)
 				tempMgr.put(table.getIdColumnMeta());
         	
         	tempMgr.put(table);

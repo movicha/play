@@ -38,13 +38,13 @@ public class PlayCassie {
 	public final static String HISTORYFILE = ".playcassie.history";
 
 	private CmdListPartitions partitions = new CmdListPartitions();
-	
+
 	public PlayCassie(NoSqlEntityManagerFactory factory) {
 		this.factory = factory;
 	}
 
 	public static void main(String[] args) {
-		
+
 //		String hex = "44626f5461626c654d6574613a636f6c756d6e46616d696c79";
 //		byte[] d = Hex.decodeHex(hex.toCharArray());
 //		String value = StandardConverters.convertToString(String.class, d);
@@ -54,7 +54,7 @@ public class PlayCassie {
 //		char[] str = Hex.encodeHex(data);
 //		String s = new String(str);
 //		log.info("s="+s);
-		
+
 		PlayOptions bean = new PlayOptions();
 	    CmdLineParser parser = new CmdLineParser(bean);
 		try {
@@ -64,7 +64,7 @@ public class PlayCassie {
 		    printUsage(parser);
 		    System.exit(-1);
 		}
-		
+
 		DbTypeEnum storeType = DbTypeEnum.lookup(bean.getType());
 		if(storeType == null) {
 			printErr("type must be inmemory or cassandra");
@@ -82,11 +82,16 @@ public class PlayCassie {
 			ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 			root.setLevel(Level.WARN);
 		}
-			
+
 		Map<String, Object> properties = new HashMap<String, Object>();
-		Bootstrap.createAndAddBestCassandraConfiguration(properties , "", bean.getKeyspace(), bean.getSeeds());
+		if(storeType == DbTypeEnum.CASSANDRA) {
+			Bootstrap.createAndAddBestCassandraConfiguration(properties , "", bean.getKeyspace(), bean.getSeeds());
+		}
+		else if (storeType == DbTypeEnum.MONGODB) {
+			Bootstrap.createAndAddBestMongoDbConfiguration(properties ,"", bean.getKeyspace(), bean.getSeeds());
+		}
 		properties.put(Bootstrap.AUTO_CREATE_KEY, "create");
-		
+
 		NoSqlEntityManagerFactory factory = Bootstrap.create(storeType, properties);
 		new PlayCassie(factory).start();
 	}
@@ -156,7 +161,7 @@ public class PlayCassie {
 	private void process(String newLine) {
 		log.debug("processing line="+newLine);
 		String[] commands = newLine.split(";");
-		
+
 		for(String cmd : commands) {
 			try {
 				String justCmd = cmd.trim();
@@ -171,7 +176,7 @@ public class PlayCassie {
 	}
 	private void processCommand(String cmd) {
 		NoSqlEntityManager mgr = factory.createEntityManager();
-		
+
 		if("help".equals(cmd)) {
 			println("Getting around");
 			println("help;            Display this help");
@@ -239,8 +244,8 @@ public class PlayCassie {
 	private void processCreateTable(String newCmd) {
 		String leftOver = newCmd.substring(6);
 		String command = leftOver.trim();
-		
-		
+
+
 	}
 
 	private void listTables(String cmd, NoSqlEntityManager mgr) {
